@@ -1,0 +1,18 @@
+
+const {app, BrowserWindow} = require('electron')
+
+require('../renderer/index')
+
+app.on('ready', () => {
+
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+  })
+  win.loadURL('http://localhost:3000')
+
+})
+
+app.on('window-all-closed', () => {
+  app.quit()
+})
