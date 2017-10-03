@@ -1,0 +1,12 @@
+{
+  "name": "mongo-service",
+  "version": "0.0.0",
+  "description": "MongoDB Service for Node.js",
+  "repository": "https://github.com/huangruichang/mongo-vue-electron",
+  "peerDependencies": {
+    "mongodb": "2.x"
+  },
+  "devDependencies": {
+    "mongodb": "^2.2.31"
+  }
+}
