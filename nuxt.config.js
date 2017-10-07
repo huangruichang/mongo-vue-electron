@@ -1,5 +1,9 @@
 
+const root = './src'
+
 module.exports = {
-  srcDir: './src/renderer',
-  plugins: ['./src/renderer/plugins/at-ui.js']
+  srcDir: `${root}/renderer`,
+  plugins: [
+    `${root}/renderer/plugins/at-ui.js`
+  ]
 }

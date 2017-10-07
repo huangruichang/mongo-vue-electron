@@ -5,7 +5,7 @@
   "author": "huangruichang <532079207@qq.com>",
   "private": true,
   "scripts": {
-    "start": "electron src/main",
+    "start": "electron src/main --js-flags=\"--harmony-async-await\"",
     "precommit": "npm run lint",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
@@ -36,6 +36,7 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.0",
     "cssnano": "^3.10.0",
+    "electron-prebuilt": "^1.4.13",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-friendly-formatter": "^3.0.0",
