@@ -3,6 +3,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const { join } = require('path')
 const os = require('os')
 const MongoService = require('../../packages/mongo-service')
+const error = require('./error')
 
 function initDevTools () {
   const keyAndVersion = 'nhdogjmejiglipccpnnnanhbledajbpd/3.1.6_0'
@@ -38,7 +39,7 @@ app.on('window-all-closed', () => {
 
 let db, ms
 const CONNECT_EVENT = 'connect'
-ipcMain.on(CONNECT_EVENT, async function (event, host, port, user, password) {
+ipcMain.on(CONNECT_EVENT, async function (event, host, port, user, password, dbName) {
   ms = new MongoService({
     host: host,
     port: port,
@@ -46,19 +47,37 @@ ipcMain.on(CONNECT_EVENT, async function (event, host, port, user, password) {
     pwd: password
   })
   try {
-    db = await ms.connect()
+    db = await ms.connect(dbName)
     if (db) {
-      event.sender.send(`${CONNECT_EVENT}-response`, {
-        result: true
-      })
+      event.sender.send(`${CONNECT_EVENT}-response`, {})
     } else {
       event.sender.send(`${CONNECT_EVENT}-response`, {
-        result: false
+        err: error('fail')
       })
     }
   } catch (e) {
     event.sender.send(`${CONNECT_EVENT}-response`, {
-      result: false
+      err: error(e)
+    })
+  }
+})
+
+const COLLECTIONS_LIST = 'collections.list'
+ipcMain.on(COLLECTIONS_LIST, async function (event) {
+  if (db) {
+    try {
+      let collections = await db.listCollections().toArray() || []
+      event.sender.send(`${COLLECTIONS_LIST}-response`, {
+        collections: collections
+      })
+    } catch (e) {
+      event.sender.send(`${CONNECT_EVENT}-response`, {
+        err: error(e)
+      })
+    }
+  } else {
+    event.sender.send(`${CONNECT_EVENT}-response`, {
+      err: error('fail')
     })
   }
 })

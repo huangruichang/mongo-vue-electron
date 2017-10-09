@@ -9,6 +9,7 @@ import createLogger from 'vuex/dist/logger'
 const createStore = () => {
   return new Vuex.Store({
     state: {
+      err: '',
       connection_init: false,
       collections: []
     },

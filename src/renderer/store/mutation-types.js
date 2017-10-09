@@ -1,4 +1,5 @@
 
-export const CONNECT_SUCCESS = 'CONNECT_SUCCESS'
-export const CONNECT_FAIL = 'CONNECT_FAIL'
+export const CONNECT = 'CONNECT'
+export const LIST_COLLECTIONS = 'LIST_COLLECTIONS'
+export const FAIL = 'FAIL'
 

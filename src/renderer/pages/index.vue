@@ -12,6 +12,7 @@
             <at-input v-model="port" placeholder="port"></at-input>
             <at-input v-model="user" type="text" placeholder="user"></at-input>
             <at-input v-model="password" type="password" placeholder="password"></at-input>
+            <at-input v-model="dbName" type="text" placeholder="db"></at-input>
             <div class="button-group">
               <at-button v-on:click="reset">reset</at-button>
               <at-button v-on:click="confirm" type="primary">confirm</at-button>
@@ -71,7 +72,8 @@
           host: this.host,
           user: this.user,
           port: this.port,
-          password: this.password
+          password: this.password,
+          dbName: this.dbName
         })
       }
     },
@@ -80,11 +82,19 @@
         host: '',
         port: '27017',
         user: '',
-        password: ''
+        password: '',
+        dbName: ''
       }
     },
     mounted () {
-
+      let thiz = this
+      this.$store.watch(function (state) {
+        return state.connection_init
+      }, function (connection_init) {
+        if (connection_init) {
+          thiz.$router.push('collections')
+        }
+      })
     }
   }
 </script>
