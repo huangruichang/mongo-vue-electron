@@ -3,10 +3,17 @@
   "version": "0.0.0",
   "description": "MongoDB Service for Node.js",
   "repository": "https://github.com/huangruichang/mongo-vue-electron",
+  "scripts": {
+    "test": "ava"
+  },
+  "ava": {
+    "failFast": true
+  },
   "peerDependencies": {
     "mongodb": "2.x"
   },
   "devDependencies": {
+    "ava": "^0.22.0",
     "mongodb": "^2.2.31"
   }
 }

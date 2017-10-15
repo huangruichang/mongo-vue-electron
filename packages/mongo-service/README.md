@@ -9,7 +9,7 @@ let MongoService = require('mongo-service')
 
 let mongo = new MongoService({
   host: 'localhost', port: 27017,
-  user: 'fritx', pwd: 'secret'
+  user: 'fritx', pwd: '***SECRET***'
 })
 
 let db = await mongo.connect('we-admin-dev')
